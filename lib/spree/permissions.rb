@@ -18,6 +18,7 @@ module Spree
     end
   
     define_method('default-permissions') do |current_ability, user|
+      current_ability.can :create, Spree.user_class
       current_ability.can [:read, :update, :destroy], Spree.user_class do |resource|
         resource == user
       end
@@ -30,6 +31,18 @@ module Spree
       current_ability.can :read, Spree::Address do |address|
         address.user == user
       end
+
+      current_ability.can [:index, :read], Spree::Country
+      current_ability.can [:index, :read], Spree::OptionType
+      current_ability.can [:index, :read], Spree::OptionValue
+      current_ability.can [:index, :read], Spree::Product
+      current_ability.can [:index, :read], Spree::ProductProperty
+      current_ability.can [:index, :read], Spree::Property
+      current_ability.can [:index, :read], Spree::State
+      current_ability.can [:index, :read], Spree::Taxon
+      current_ability.can [:index, :read], Spree::Taxonomy
+      current_ability.can [:index, :read], Spree::Variant
+      current_ability.can [:index, :read], Spree::Zone
     end
 
     define_method('default-admin-permissions') do |current_ability, user|
